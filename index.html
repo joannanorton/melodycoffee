@@ -411,27 +411,25 @@
                 <div class="css-python-code c w-embed">
                     <style>
                         .code_python_component span {
-                            font-size: 1.2rem;
+                            font-size: 1.5rem;
                             display: block;
-                            mix-blend-mode: soft-light;
+                            color: #ffffff;
+                            mix-blend-mode: normal;
                             pointer-events: none;
                             user-select: none;
+                            text-align: right;
+                            text-align-last: right;
                         }
 
-                        .code-1tab {
-                            margin-left: 2.4em;
-                        }
-
-                        .code-2tab {
-                            margin-left: 4.8em;
-                        }
-
-                        .code-3tab {
-                            margin-left: 7.2em;
-                        }
-
-                        .code-4tab {
-                            margin-left: 9.6em;
+                        .apply_code_scrub {
+                            background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg');
+                            background-size: cover !important;
+                            background-position: center !important;
+                            background-repeat: no-repeat !important;
+                            padding: 1rem !important;
+                            border-radius: 1px !important;
+                            display: block !important;
+                            position: relative !important;
                         }
 
                         @media screen and (max-width: 991px ) {
@@ -735,7 +733,7 @@
                                 </span>
                             </div>
                             <div id="w-node-_1bbd1066-e87a-7647-11ad-1ea78788ebeb-3be31fe7" class="hero_col3 is-bottom">
-                                <a data-wf--link-bracket--variant="small-brackets-width" href="/about" class="link_bracket_component font-geist w-inline-block">
+                                <a data-wf--link-bracket--variant="small-brackets-width" href="https://joannanorton.github.io/melodycoffee/about.html" class="link_bracket_component font-geist w-inline-block">
                                     <span class="link_bracket_text text-uppercase">LEBIH LANJUT</span>
                                     <div class="w-layout-hflex link_bracket_wrap w-variant-69e1c6ad-6f8c-0831-8d47-5752a1f2d463">
                                         <div>[</div>
@@ -896,23 +894,24 @@
                         <div class="apply_code_scrub container-large">
                             <div class="code_python_component font-geist text-transform-none w-embed">
                                 <div class="code geist" role="img" aria-label="Python code - communication of the sentient foundation with the world">
-                                    <span>import dspy</span>
-                                    <span>from roma_dspy import Aggregator, Atomizer, Executor, Planner, Verifier, SubTask</span>
-                                    <span>from roma_dspy.types import TaskType</span>
+                                    <span>Melody Coffee percaya bahawa kopi terbaik tidak dilahirkan dari </span>
+                                    <span>pemaksaan terhadap alam, melainkan dari sebuah simfoni yang harmonis </span>
+                                    <span>antara manusia dan ekosistemnya</span>
                                     <br>
-                                    <span># Optional tool that the Executor may call</span>
-                                    <span>def get_weather(city: str) -&gt;str:</span>
-                                    <span class="code-1tab">"""Return a canned weather report for the city."""</span>
-                                    <span class="code-1tab">return f"The weather in {city} is sunny."</span>
+                                    <span>sebagai produsen micro lot specialty coffee kami bergerak dengan satu </span>
+                                    <span>keyakinan sederhana namun mendalam. alam yang sehat dan baik akan mehasilkan</span>
+                                    <span class="code-1tab">kopi yang baik. lebih dari sekedar kopi, komitmen kami melalui AGROFORESTRY</span>
+                                    <span class="code-1tab">di tengah maraknya pertanian monokultur yang seringkali mengorbankan kesuburan tanah</span>
                                     <br>
-                                    <span># Executor geared toward ReAct with a Fireworks model</span>
-                                    <span>executor_lm = dspy.LM(</span>
-                                    <span class="code-1tab">"fireworks_ai/accounts/fireworks/models/kimi-k2-instruct-0905",</span>
-                                    <span class="code-1tab">temperature=0.7,</span>
-                                    <span class="code-1tab">cache=True,</span>
-                                    <span>)</span>
-                                    <span>executor = Executor(</span>
-                                    <span class="code-1tab">lm=executor_lm,</span>
+                                    <span>Metode ini menjadi sangat penting bagi kami karena dengan metode ini kami juga</span>
+                                    <span>menjaga Biodiversitas bagi berbagai kehidupan. pohon menjadi naungan para burung</span>
+                                    <span class="code-1tab">dan serangga yang secara alamai bertindak sebagai pengendali hama.</span>
+                                    <br>
+                                    <span class="code-1tab">nutrisi tanah yang alami dari guguran daun penaungan menjadi pupuk organik</span>
+                                    <span class="code-1tab">alami yang memperkaya unsur hara tanah tanpa bahan kimia sintetis</span>
+                                    <span>memberikan rasa yang unik walaupun hal itu membuat pematangan buah kopi berjalan lebih lambat</span>
+                                    <span>hal ini memberikan waktu yang cukup bagi cherry kopi untuk menyerap nutrisi secara maksimal </span>
+                                    <span class="code-1tab">mengahasilkan profil rasa yang lebih komplex, bersih dan berkarakter khas specialty coffee</span>
                                     <span class="code-1tab">prediction_strategy="react",</span>
                                     <span class="code-1tab">tools=[get_weather],</span>
                                     <span class="code-1tab">context_defaults={"track_usage": True},</span>
@@ -1798,7 +1797,7 @@ Foundation together</h2>
                         </div>
                     </div>
                     <a aria-label="Sentient Foundation - Homepage" href="/" aria-current="page" class="footer_logo w-inline-block w--current">
-                        <img src="https://cdn.prod.website-files.com/698daec2aaf157233be31fe9/698daec2aaf157233be3209a_logo_large.svg" loading="lazy" alt=""/>
+                        <img src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/footer.png" loading="lazy" alt=""/>
                     </a>
                 </div>
             </footer>
@@ -3350,7 +3349,7 @@ Foundation together</h2>
             });
 
             // mountain 6 last
-            const MOUNTAIN_URL = "https://cdn.prod.website-files.com/698daec2aaf157233be31fe9/698daec2aaf157233be3207b_mountain6.webp";
+            const MOUNTAIN_URL = "https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/slowdry.jpg";
             "use strict";
             function _classCallCheck(e, t) {
                 if (!(e instanceof t))
@@ -3379,21 +3378,21 @@ Foundation together</h2>
                 scale: 1.25
             }
               , MOUNTAIN_FISHEYE_CONFIG = {
-                strength: 3.5,
-                radius: 1.1,
-                radiusX: 1,
-                radiusY: 1.9,
-                positionX: .5,
-                positionY: .5,
-                startLensY: .5,
-                endLensY: .45,
+                strength: 1.5,
+                radius: 0.1,
+                radiusX: 0,
+                radiusY: 0,
+                positionX: 0,
+                positionY: 0,
+                startLensY: 0,
+                endLensY: 0,
                 mouseRange: .03,
                 minWidth: 900,
                 mobile: {
-                    strength: 2.5,
-                    radiusX: 1.4,
-                    radiusY: 1.9,
-                    radius: 1.3
+                    strength: 1.5,
+                    radiusX: 0.4,
+                    radiusY: 0.9,
+                    radius: 0.3
                 }
             }
               , mountainVertexShader = "\n\tvarying vec2 vUv;\n\t\n\tvoid main() {\n\t\tvUv = uv;\n\t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\t}\n"
