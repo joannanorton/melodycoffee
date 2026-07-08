@@ -630,23 +630,23 @@ background: #fff;	transform: translate(-50%, -50%);	cursor: pointer;will-change:
                                 </div>
                                 <div class="w-layout-vflex point">
                                     <div class="w-layout-vflex point_text_wrap">
-                                        <h2 class="title text-style-h3">Openness</h2>
+                                        <h2 class="title text-style-h3">Manusia merawat alam</h2>
                                         <p class="font-geist point_label decs">
-                                            Intelligence should be <br/>shared, not owned.
+                                            Menjaga ekosistem alam <br/>menjaga hayati biodiversity
                                         </p>
                                     </div>
                                 </div>
                                 <div class="w-layout-vflex point">
                                     <div class="w-layout-vflex point_text_wrap">
-                                        <h2 class="title text-style-h3">Alignment</h2>
-                                        <p class="font-geist point_label decs">AGI must be guided by humanity’s interests</p>
+                                        <h2 class="title text-style-h3">Alam merawat kopi</h2>
+                                        <p class="font-geist point_label decs">Keragaman biodiversity menjadi alat utama bagi kami</p>
                                     </div>
                                 </div>
                                 <div class="w-layout-vflex point">
                                     <div class="w-layout-vflex point_text_wrap">
-                                        <h2 class="title text-style-h3">Collaboration</h2>
+                                        <h2 class="title text-style-h3">Kopi merawat manusia</h2>
                                         <p class="font-geist point_label decs">
-                                            Progress through shared work, <br/>not closed competition.
+                                            Melalui Agroforestry <br/>pohon kopi mencegah erosi air
                                         </p>
                                     </div>
                                 </div>
@@ -654,15 +654,13 @@ background: #fff;	transform: translate(-50%, -50%);	cursor: pointer;will-change:
                         </div>
                         <div class="about_text_wrap">
                             <div class="w-layout-vflex container-medium is-gap-96">
-                                <p class="text-style-h1">Sentient Foundation is a non-profit organization committed to building open-source AGI, independent of single-entity control.</p>
+                                <p class="text-style-h1">Misi kami bukan hanya menghasilkan kopi terbaik melalui agroforestry, kami menjaga keberlangsungan Biodiversity tanah yang bermanfaat bagi tumbuhan lain</p>
                                 <div class="about_p_right">
                                     <p class="font-geist text-align-right margin-auto">WHO WE EXIST FOR?</p>
                                 </div>
-                                <p class="text-style-h1">Researchers seeking scientific freedom and credibility.</p>
-                                <p class="text-style-h1">Engineers who want to build AGI infrastructure in the open.</p>
-                                <p class="text-style-h1">Artists and thinkers exploring consciousness, intelligence, and human–machine co-creation.</p>
-                                <p class="text-style-h1">Universities, labs, and independent collectives that believe knowledge should not be gatekept.</p>
-                            </div>
+                                <p class="text-style-h1">Melody Coffee percaya rantai makanan alami di dalam kandungan tanah yang menjadikan tumbuhan kopi kami menyerap nutrisi tanah dengan 
+                                    maksimal, keragaman Biodiversity mengahasilkan kalium yang penting bagi akumulasi gula dan asam organik di dalam ceri kopi mencipatakan bright acidity yang komplex
+                                </p>
                             <div class="w-layout-vflex container-medium is-gap-96 is-2">
                                 <div class="about_p_right">
                                     <p class="font-geist text-align-right margin-auto">OUR BELIEFS</p>
@@ -681,6 +679,9 @@ background: #fff;	transform: translate(-50%, -50%);	cursor: pointer;will-change:
                                 .is-colab, .is-colab span {
                                     color: inherit;
                                     mix-blend-mode: normal;
+                                }
+                                .text-style-h1 {
+                                    font-size: 1.7rem !important;
                                 }
                             </style>
                         </div>
@@ -912,7 +913,7 @@ background: #fff;	transform: translate(-50%, -50%);	cursor: pointer;will-change:
                         </div>
                     </div>
                     <a aria-label="Sentient Foundation - Homepage" href="/" class="footer_logo w-inline-block">
-                        <img src="https://cdn.prod.website-files.com/698daec2aaf157233be31fe9/698daec2aaf157233be3209a_logo_large.svg" loading="lazy" alt=""/>
+                        <img src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/footer.png" loading="lazy" alt=""/>
                     </a>
                 </div>
             </footer>
@@ -1198,28 +1199,28 @@ background: #fff;	transform: translate(-50%, -50%);	cursor: pointer;will-change:
                 }
             }
               , ABOUT_FISHEYE_CONFIG = {
-                strength: 1.9,
-                radius: 1.1,
-                radiusX: 1,
-                radiusY: 1.9,
-                positionX: .5,
-                positionY: .5,
-                startLensY: .45,
-                endLensY: .45,
-                mouseRange: .03,
+                strength: 0,
+                radius: 0,
+                radiusX: 0,
+                radiusY: 0,
+                positionX: 0,
+                positionY: 0,
+                startLensY: 0,
+                endLensY: 0,
+                mouseRange: 0,
                 minWidthDesktop: 1353,
                 minWidthTablet: 480,
                 mobile: {
-                    strength: 2.5,
-                    radiusX: 1.4,
-                    radiusY: 1.9,
-                    radius: 1.3
+                    strength: 0,
+                    radiusX: 0,
+                    radiusY: 0,
+                    radius: 0
                 },
                 tablet: {
-                    strength: 1.9,
-                    radiusX: 1,
-                    radiusY: 1.9,
-                    radius: 1.1
+                    strength: 0,
+                    radiusX: 0,
+                    radiusY: 0,
+                    radius: 0
                 }
             }
               , aboutVertexShader = "\n\tvarying vec2 vUv;\n\t\n\tvoid main() {\n\t\tvUv = uv;\n\t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n\t}\n"
