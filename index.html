@@ -1,320 +1,570 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Melody Coffee</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
-</head>
-<body>
-<div class="background">
-    <div class="bg active" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg')"></div>
-    <div class="bg" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg')"></div>
-    <div class="bg" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg')"></div>
-    <div class="bg" style="background-image:url('img/greenbean.jpg')"></div>
-</div>
-<header>
-<div class="logo">MELODY COFFEE</div>
-<nav>
-    <a href="#">About</a>
-    <a href="#">Mission</a>
-    <a href="#">Process</a>
-    <a href="#">Order</a>
-</nav>
-</header>
-<div class="story">
-    <h1 id="headline"></h1>
-    <p id="paragraph"></p>
-    <button id="read-more-btn" style="display: none;">Read More</button>
-</div>
-<div class="panels">
-    <section class="panel"></section>
-    <section class="panel"></section>
-    <section class="panel"></section>
-</div>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    html,body{
-        width: 100%;
-        height: 100%;
-        overflow-x: hidden;
-    }
-    body{
-        background: #000;
-        color: #fff;
-        font-family: Arialm Arial, Helvetica, sans-serif;
-    }
-    .background{
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        z-index: -2;
-    }
-    .bg{
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0;
-        transform: scale(1.08);
-    }
-    .bg.active{
-        opacity: 1;
-    }
-    .background::after{
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,.30);
-    }
-
-    header{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width:100%;
-        padding:40px 60px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        z-index:100;
-    }
-    .logo{
-        font-size:18px;
-        letter-spacing:5px;
-        text-transform:uppercase;
-        font-weight:300;
-    }
-    nav{
-        display:flex;
-        gap:40px;
-    }
-    nav a{
-        color:white;
-        text-decoration:none;
-        opacity:.6;
-        transition:.4s;
-        font-size:15px;
-    }
-    nav a:hover{
-        opacity:1;
-    }
-    .story{
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        width:min(760px,85vw);
-        text-align:center;
-        z-index:20;
-    }
-    .story h1{
-        font-size:clamp(44px,6vw,84px);
-        font-weight:200;
-        line-height:1.05;
-        margin-bottom:32px;
-        letter-spacing:-2px;
-    }
-    .story p{
-        width:80%;
-        margin:auto;
-        font-size:20px;
-        line-height:1.8;
-        opacity:.82;
-    }
-    #read-more-btn {
-        background: #333;
-        color: #fff;
-        border: none;
-        padding: 8px 16px;
-        margin-top: 12px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 4px;
-        transition: background 0.2s ease;
-    }
-    #read-more-btn:hover {
-        background: #555;
-    }
-    .panels{
-        position:relative;
-        padding-bottom: 20vh;
-    }
-    .panel{
-        width:100%;
-        height:100svh;
-    }
-    @media(max-width:900px){
-        header{
-            padding:30px;
-        }
-        nav{
-            gap:20px;
-        }
-    .story h1{
-        font-size:48px;
-    }
-    .story p{
-        width:100%;
-        font-size:18px;
-    }
-}
-@media(max-width:700px){
-    header{
-        flex-direction:column;
-        gap:20px;
-    }
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-    .story{
-        width:90%;
-    }
-    .story h1{
-        font-size:38px;
-    }
-    .story p{
-        font-size:16px;
-        line-height:1.6;
-    }
-}
-</style>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-
-    const scenes = [
-        {
-            title:"Melody Coffee",
-            text:"kami percaya kopi yang baik berasal dari alam yang baik dan terjaga",
-            fullText:"kopi mah kudu anu berem pokonamah di petik na",
-        },
-        {
-            title:"kami bukan hanya menanam kopi",
-            text:"Melalui agroforestry kami mengembalikan kembali fungsi hutan yaitu sebagai rumah bagi semua ecosystem yang membutuhkanya",
-            fullText:"tah lamun kopi ulah kapanasan teuing, emang tereh berem ka asak na tapi teu ngeunah rasa na",
-        },
-        {
-            title:"fungi",
-            text:"fungi alami yang berasal dari hutan memberikan sumber nutrisi yang sangat baik bagi kopi",
-            fullText:"tah si jamur teh ngabantu pisan penyerapan nutrisi ka si taneh na ameh kopi na ngeungah",
-        },
-    ];
+<!doctype html>
+<html lang="en" class="lenis">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Melody Coffee — Premium Storytelling Experience</title>
     
-    const readMoreBtn = document.getElementById("read-more-btn");
-    let currentFullText = "";
-    const backgrounds = document.querySelectorAll(".bg");
-    const headline = document.getElementById("headline");
-    const paragraph = document.getElementById("paragraph");
-    const panels = document.querySelectorAll(".panel");
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     
-    gsap.set(backgrounds,{
-        opacity:0,
-        scale:1.08
-    });
-    gsap.set(backgrounds[0],{
-        opacity:1
-    });
-
-    // FIX 1: Explicitly load the first scene contents right away on page load
-    headline.innerHTML = scenes[0].title;
-    paragraph.innerHTML = scenes[0].text;
-    currentFullText = scenes[0].fullText || "";
-    if (currentFullText) {
-        readMoreBtn.style.display = "inline-block";
-        readMoreBtn.innerText = "Read More";
-    }
-
-    panels.forEach((panel,index)=>{
-        ScrollTrigger.create({
-            trigger:panel,
-            start:"top 80%",
-            end:"bottom 20%",
-            onEnter:()=>changeScene(index),
-            onEnterBack:()=>changeScene(index)
-        });
-    });
-
-    function changeScene(index){
-        backgrounds.forEach((bg,i)=>{
-            gsap.to(bg,{
-                opacity:i===index?1:0,
-                scale:i===index?1:1.08,
-                duration:1.5,
-                ease:"power2.out"
-            });
-        });
-        let tl=gsap.timeline();
-        tl.to([headline,paragraph, readMoreBtn],{
-            opacity:0,
-            y:40,
-            duration:.35,
-            ease:"power2.out"
-        });
-        tl.call(()=>{
-            headline.innerHTML=scenes[index].title;
-            paragraph.innerHTML=scenes[index].text;
-            currentFullText = scenes[index].fullText || "";
-            
-            if (currentFullText) {
-                readMoreBtn.style.display = "inline-block";
-                readMoreBtn.innerText = "Read More";
-            } else {
-                readMoreBtn.style.display = "none";
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              serif: ['"Playfair Display"', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
             }
-        });
-
-        tl.fromTo(
-            headline,
-            { opacity:0, y:50 },
-            { opacity:1, y:0, duration:.8, ease:"power3.out" }
-        );
-        tl.fromTo(
-            paragraph,
-            { opacity:0, y:30 },
-            { opacity:.82, y:0, duration:.8, ease:"power3.out" },
-            "-=.45"
-        );
-        tl.fromTo(
-            readMoreBtn,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: .5, ease: "power3.out" },
-            "-=.6"
-        );
-    }
-
-    // FIX 2: Evaluate innerText for cleaner toggle execution
-    readMoreBtn.addEventListener("click", () => {
-        const activeScene = scenes.find(s => s.fullText === currentFullText);
-        if (!activeScene) return;
-
-        if (readMoreBtn.innerText === "Read More") {
-            paragraph.innerHTML = activeScene.text + " " + currentFullText;
-            readMoreBtn.innerText = "Read Less";
-            gsap.fromTo(paragraph, { opacity: 0.5 }, { opacity: 0.82, duration: 0.4 });
-        } else {
-            paragraph.innerHTML = activeScene.text;
-            readMoreBtn.innerText = "Read More";
+          }
         }
-    });
+      }
+    </script>
+    
+    <!-- CSS Custom Styles & Resets -->
+    <style>
+      /* Lenis smooth scrolling rules */
+      html.lenis, html.lenis body {
+        height: auto;
+      }
+      .lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis-smooth [data-lenis-prevent] {
+        overflow: clip;
+      }
+      .lenis-target {
+        scroll-behavior: auto !important;
+      }
 
-    backgrounds.forEach((bg)=>{
-        gsap.to(bg,{
-            scale:1.15,
-            duration:8,
-            repeat:-1,
-            yoyo:true,
-            ease:"none"
+      /* Premium dark aesthetic styling */
+      body {
+        background-color: #0F0E0D;
+        color: #E6E1D6;
+        overflow-x: hidden;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0F0E0D;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(230, 225, 214, 0.15);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(230, 225, 214, 0.3);
+      }
+
+      /* Helper for vertical rotated text */
+      .vertical-text {
+        writing-mode: vertical-rl;
+      }
+    </style>
+  </head>
+  <body class="selection:bg-[#E6E1D6]/20 selection:text-[#E6E1D6] font-sans antialiased text-[#E6E1D6]">
+    
+    <!-- 1. FIXED BACKGROUND IMAGES CONTAINER -->
+    <div class="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0 bg-[#0F0E0D]">
+      <!-- Scene 1 Background -->
+      <div
+        id="bg-0"
+        class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[1.5s]"
+        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg'); opacity: 1; transform: scale(1);"
+      ></div>
+      <!-- Scene 2 Background -->
+      <div
+        id="bg-1"
+        class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[1.5s]"
+        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg'); opacity: 0; transform: scale(1.1);"
+      ></div>
+      <!-- Scene 3 Background -->
+      <div
+        id="bg-2"
+        class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[1.5s]"
+        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg'); opacity: 0; transform: scale(1.1);"
+      ></div>
+      <!-- Scene 4 Background -->
+      <div
+        id="bg-3"
+        class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[1.5s]"
+        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/gbbg.jpg'); opacity: 0; transform: scale(1.1);"
+      ></div>
+
+      <!-- Cinematic dark mask keeping background visible and texts readable -->
+      <div class="absolute inset-0 bg-black/25 pointer-events-none"></div>
+    </div>
+
+    <!-- 2. EDITORIAL LEFT SIDEBAR FRAME -->
+    <aside class="fixed top-0 left-0 w-[80px] h-full z-40 flex flex-col justify-between items-center py-10 hidden lg:flex select-none pointer-events-none">
+      <div class="font-serif italic text-xs tracking-wider text-[#E6E1D6]/80 drop-shadow-md">
+        M • C
+      </div>
+      
+      <div class="text-[10px] font-sans uppercase tracking-[0.45em] text-[#E6E1D6]/80 vertical-text rotate-180 drop-shadow-md">
+        The Harvest Cycle • 2026 Collection
+      </div>
+
+      <div class="flex flex-col items-center gap-1 drop-shadow-md">
+        <div id="left-counter-curr" class="font-serif italic text-xl text-[#E6E1D6]">01</div>
+        <div class="w-4 h-px bg-[#E6E1D6]/30"></div>
+        <div class="text-[9px] font-mono text-[#E6E1D6]/60">04</div>
+      </div>
+    </aside>
+
+    <!-- 3. EDITORIAL RIGHT SIDEBAR FRAME -->
+    <aside class="fixed top-0 right-0 w-[80px] h-full z-40 flex flex-col justify-between items-center py-10 hidden lg:flex select-none pointer-events-none">
+      <div class="text-[#E6E1D6]/80 animate-pulse drop-shadow-md">
+        <!-- Inline Coffee Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 0 1 0 8h-1"/><path d="M6 2v2"/></svg>
+      </div>
+
+      <div class="text-[10px] font-sans uppercase tracking-[0.45em] text-[#E6E1D6]/80 vertical-text drop-shadow-md">
+        Vibration • Rhythm • Flavor
+      </div>
+
+      <!-- Decorative Scroll Progress Ring -->
+      <div class="relative w-7 h-7 flex items-center justify-center drop-shadow-md">
+        <svg class="w-full h-full transform -rotate-90">
+          <circle
+            cx="14"
+            cy="14"
+            r="10"
+            class="stroke-[#E6E1D6]/15"
+            stroke-width="1.5"
+            fill="transparent"
+          />
+          <circle
+            id="progress-circle"
+            cx="14"
+            cy="14"
+            r="10"
+            class="stroke-[#E6E1D6] transition-all duration-150"
+            stroke-width="1.5"
+            fill="transparent"
+            stroke-dasharray="62.83"
+            stroke-dashoffset="62.83"
+          />
+        </svg>
+        <span id="progress-text" class="absolute text-[8px] font-mono text-[#E6E1D6]/90 font-medium">0%</span>
+      </div>
+    </aside>
+
+    <!-- 4. NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 lg:left-[80px] right-0 lg:right-[80px] h-[80px] z-40 px-6 md:px-12 flex items-center justify-between select-none">
+      <div class="flex items-center gap-3 drop-shadow-md">
+        <!-- Inline Coffee Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 0 1 0 8h-1"/><path d="M6 2v2"/></svg>
+        <div>
+          <h1 class="font-serif text-lg md:text-xl font-medium tracking-normal text-[#E6E1D6]">
+            Melody Coffee
+          </h1>
+        </div>
+      </div>
+
+      <!-- Center navigation labels (purely floating) -->
+      <div class="hidden md:flex items-center gap-8 text-[10px] font-sans uppercase tracking-[0.25em] text-[#E6E1D6]/85 drop-shadow-md">
+        <span class="hover:text-white transition-colors cursor-pointer">Story</span>
+        <span class="text-[#E6E1D6]/30">/</span>
+        <span class="hover:text-white transition-colors cursor-pointer">Origins</span>
+        <span class="text-[#E6E1D6]/30">/</span>
+        <span class="hover:text-white transition-colors cursor-pointer">Craft</span>
+      </div>
+    </header>
+
+    <!-- 5. CENTERED FIXED TEXT CONTENT OVERLAY -->
+    <div class="fixed inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-4 md:px-6">
+      <div class="max-w-xl w-full text-center pointer-events-auto relative p-4 md:p-8">
+        
+        <!-- Micro spec details -->
+        <div class="flex items-center justify-center gap-3 mb-6 flex-wrap drop-shadow-lg">
+          <span 
+            id="spec-badge" 
+            class="px-3 py-1 bg-[#E6E1D6]/15 border border-[#E6E1D6]/30 text-[9px] font-mono tracking-[0.25em] uppercase text-[#E6E1D6] rounded-none"
+          >
+            MOVEMENT 01
+          </span>
+          <div class="flex items-center gap-1.5 text-[#E6E1D6] text-xs font-mono">
+            <!-- Inline MapPin Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E6E1D6]/80"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="spec-location">Gayo Highlands, Sumatra</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-[#E6E1D6] text-xs font-mono">
+            <!-- Inline Compass Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E6E1D6]/80"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span id="spec-altitude">1,550m ASL</span>
+          </div>
+        </div>
+
+        <!-- Core Content -->
+        <h2 
+          id="headline" 
+          class="font-serif text-4xl md:text-5xl lg:text-6.5xl font-light text-white italic leading-[1.05] tracking-tight mb-6 select-none drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
+        >
+          Symphony of the Soil
+        </h2>
+        
+        <p 
+          id="paragraph" 
+          class="font-sans text-[#E6E1D6] text-sm md:text-base leading-relaxed mb-8 select-none font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] max-w-lg mx-auto"
+        >
+          Every bean begins with a silent rhythm. Deep in the highlands of Gayo, Sumatra, mineral-rich volcanic soil conducts a masterpiece of nutrients, where tropical microclimates and ancient canopies orchestrate the perfect setting for coffee cherry development.
+        </p>
+
+        <!-- Flavor Notes Row -->
+        <div 
+          id="notes-container" 
+          class="flex flex-wrap items-center justify-center gap-2 mb-8 drop-shadow-md"
+        >
+          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider">Volcanic Ash</span>
+          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider">Black Honey</span>
+          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider">Bergamot</span>
+        </div>
+
+        <!-- Expandable Story block -->
+        <div
+          id="expanded-container"
+          class="overflow-hidden h-0 opacity-0 mb-6 transition-all duration-500"
+        >
+          <div class="border-t border-[#E6E1D6]/20 pt-6 mt-2 bg-black/40 backdrop-blur-sm p-6 rounded-none">
+            <p 
+              id="extended-content-text" 
+              class="font-sans text-[#E6E1D6]/95 text-xs md:text-sm leading-relaxed text-left font-light italic"
+            >
+              The elevation, averaging 1,550 meters above sea level, provides a cool canopy that slows down cherry maturation. This patient ripening process allows sugars to concentrate deeply within the seed, yielding complex floral undertones and a bright, crisp acidity that is unique to our terroir.
+            </p>
+          </div>
+        </div>
+
+        <!-- Expand Toggle Trigger -->
+        <button
+          id="read-more-btn"
+          class="group inline-flex items-center gap-3 px-6 py-3 border border-[#E6E1D6]/40 hover:border-[#E6E1D6]/85 text-[#E6E1D6] bg-black/35 hover:bg-black/50 active:scale-95 rounded-full font-mono font-medium text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all cursor-pointer shadow-md"
+        >
+          <span id="btn-text">Read the Story</span>
+          <!-- Inline ArrowDown Icon -->
+          <svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 6. DYNAMIC CENTRAL STORY FLOW SLIDER (SMALL/MEDIUM SCREEN DETECTOR) -->
+    <div class="fixed left-6 top-1/2 -translate-y-1/2 z-35 flex lg:hidden flex-col gap-6 items-center select-none pointer-events-none">
+      <div class="relative w-0.5 h-24 bg-[#E6E1D6]/20 rounded-full overflow-hidden">
+        <div 
+          id="mobile-progress-bar"
+          class="absolute top-0 left-0 w-full bg-[#E6E1D6] transition-all duration-150"
+          style="height: 0%;"
+        ></div>
+      </div>
+    </div>
+
+    <!-- 7. METADATA FOOTER ACCENTS -->
+    <footer class="fixed bottom-0 left-0 lg:left-[80px] right-0 lg:right-[80px] h-[100px] z-40 px-6 md:px-12 flex justify-between items-center pointer-events-none select-none">
+      
+      <!-- Left footer detail -->
+      <div class="flex flex-col gap-1 font-mono text-[9px] text-[#E6E1D6]/80 tracking-widest uppercase drop-shadow-md">
+        <div>LATENCY: ZERO</div>
+        <div>EST. 2026</div>
+      </div>
+
+      <!-- Center bouncing mouse scroll indicator -->
+      <div 
+        id="scroll-indicator"
+        class="hidden md:flex flex-col items-center gap-1.5 transition-opacity duration-500 pointer-events-auto"
+      >
+        <div class="w-4 h-7 border-2 border-[#E6E1D6]/35 rounded-full flex justify-center p-1">
+          <div class="w-1 h-1 bg-[#E6E1D6]/80 rounded-full animate-bounce"></div>
+        </div>
+        <span class="text-[8px] font-mono text-[#E6E1D6]/80 tracking-widest uppercase drop-shadow-sm">
+          Scroll to Progress
+        </span>
+      </div>
+
+      <!-- Right footer detail -->
+      <div class="flex flex-col items-end gap-1 font-mono text-[9px] text-[#E6E1D6]/80 tracking-widest uppercase text-right drop-shadow-md">
+        <div class="flex items-center gap-1">
+          <!-- Inline Globe Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E6E1D6]/60"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <span>UTC TIME: 2026-07-19</span>
+        </div>
+        <div class="text-[#E6E1D6] bg-black/35 border border-[#E6E1D6]/30 px-2 py-0.5 rounded text-[8px] tracking-wider">
+          SPECIALTY LOTS
+        </div>
+      </div>
+    </footer>
+
+    <!-- 8. PANEL CONTAINERS FOR SCROLLTRIGGER MARKERS -->
+    <div class="relative z-20">
+      <div class="panel w-full" style="height: 120vh;"></div>
+      <div class="panel w-full" style="height: 120vh;"></div>
+      <div class="panel w-full" style="height: 120vh;"></div>
+      <div class="panel w-full" style="height: 120vh;"></div>
+    </div>
+
+    <!-- GSAP, ScrollTrigger & Lenis Smooth Scroll via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- Core Layout Transitions & Interaction Logic -->
+    <script>
+      // Register GSAP plugins
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Core Scene Content Data Schema
+      const SCENES = [
+        {
+          id: 1,
+          headline: "Symphony of the Soil",
+          paragraph: "Every bean begins with a silent rhythm. Deep in the highlands of Gayo, Sumatra, mineral-rich volcanic soil conducts a masterpiece of nutrients, where tropical microclimates and ancient canopies orchestrate the perfect setting for coffee cherry development.",
+          extendedText: "The elevation, averaging 1,550 meters above sea level, provides a cool canopy that slows down cherry maturation. This patient ripening process allows sugars to concentrate deeply within the seed, yielding complex floral undertones and a bright, crisp acidity that is unique to our terroir.",
+          location: "Gayo Highlands, Sumatra",
+          altitude: "1,550m ASL",
+          notes: ["Volcanic Ash", "Black Honey", "Bergamot"]
+        },
+        {
+          id: 2,
+          headline: "The Canopy Harvest",
+          paragraph: "Hand-selected under the dappled shade of organic forest canopies, only the perfectly ripe ruby-red cherries are harvested. Our growers listen to the rhythm of the seasons, hand-picking each cherry at the peak of its musical sweetness.",
+          extendedText: "Shade-grown coffee farming preserves local ecosystems and provides a natural habitat for migratory birds. This biodiversity naturally controls pests and enriches the soil, eliminating the need for harsh chemical fertilizers. Each hand-picked cherry represents our commitment to sustainable harmony with nature.",
+          location: "Takengon Plantation",
+          altitude: "1,480m ASL",
+          notes: ["Red Currant", "Citrus Blossom", "Cacao"]
+        },
+        {
+          id: 3,
+          headline: "Organic Fermentation",
+          paragraph: "Science meets alchemy in our fermentation chambers. By utilizing native micro-flora, we ferment our coffee under highly controlled anaerobic environments. This organic process acts as an amplifier, coaxing out deep, complex notes.",
+          extendedText: "During the anaerobic phase, yeast and native bacteria feed on the sweet mucilage of the coffee cherry. We constantly monitor pH levels and ambient temperature to nurture an environment where lactic acid bacteria thrive, giving our coffee an unbelievably silky body and a refined, lingering finish.",
+          location: "Melody Wet Mill",
+          altitude: "1,200m ASL",
+          notes: ["Fungi-Wild", "Stone Fruit", "Muscovado"]
+        },
+        {
+          id: 4,
+          headline: "The Green Masterpiece",
+          paragraph: "Dried slowly on raised African bamboo beds, our green beans rest until they reach a perfect 11% moisture level. Resilient, vibrant, and bursting with aromatic potential, these green masterpieces are ready to be roasted to perfection.",
+          extendedText: "Once resting is complete, the beans are hulled and meticulously hand-sorted twice to remove any defects. This double-sorting process is rigorous but essential. What remains is a pure, uniform, premium specialty grade lot—ready to be shipped and roasted to perfection by master artisans.",
+          location: "Drying Station East",
+          altitude: "1,100m ASL",
+          notes: ["Coriander Seed", "Green Tea", "Cardamom"]
+        }
+      ];
+
+      // System references
+      let activeIndex = 0;
+      let isExpanded = false;
+      let lenis;
+
+      // Initialize Lenis Smooth Scroll
+      function initLenis() {
+        lenis = new Lenis({
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
         });
-    });
-</script>
-</body>
+
+        // Frame loop integration hook directly to requestAnimationFrame
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Sync with ScrollTrigger & update progress indicators
+        lenis.on('scroll', (e) => {
+          ScrollTrigger.update();
+          
+          if (e.limit > 0) {
+            const progress = e.scroll / e.limit;
+            
+            // Update circular progress bar
+            const circle = document.getElementById('progress-circle');
+            const circumference = 2 * Math.PI * 10; // ~62.83
+            const strokeOffset = circumference * (1 - progress);
+            circle.style.strokeDashoffset = strokeOffset;
+            
+            // Update progress text percentage
+            document.getElementById('progress-text').innerText = `${Math.round(progress * 100)}%`;
+            
+            // Update mobile central line indicator
+            document.getElementById('mobile-progress-bar').style.height = `${progress * 100}%`;
+            
+            // Fade out center scroll mouse indicator when scrolled down
+            const scrollInd = document.getElementById('scroll-indicator');
+            if (progress > 0.95) {
+              scrollInd.style.opacity = '0';
+            } else {
+              scrollInd.style.opacity = (1 - (progress * 4)).toString();
+            }
+          }
+        });
+      }
+
+      // Smooth cinematic GSAP transitions
+      function transitionToScene(targetIndex, direction) {
+        if (activeIndex === targetIndex) return;
+
+        const currentIndex = activeIndex;
+        activeIndex = targetIndex;
+
+        // Update left vertical counter digit
+        document.getElementById('left-counter-curr').innerText = `0${targetIndex + 1}`;
+
+        // Create transition timeline
+        const tl = gsap.timeline();
+        const yOffset = direction === 'down' ? -35 : 35;
+
+        // 1. Fade out current content elements
+        tl.to([
+          "#headline", 
+          "#paragraph", 
+          "#read-more-btn", 
+          "#spec-badge", 
+          "#spec-location", 
+          "#spec-altitude",
+          "#notes-container"
+        ], {
+          opacity: 0,
+          y: yOffset,
+          duration: 0.35,
+          stagger: 0.02,
+          ease: "power2.in"
+        });
+
+        // 2. Perform seamless DOM content replacements
+        tl.call(() => {
+          const scene = SCENES[targetIndex];
+          document.getElementById("headline").innerText = scene.headline;
+          document.getElementById("paragraph").innerText = scene.paragraph;
+          document.getElementById("spec-badge").innerText = `MOVEMENT 0${targetIndex + 1}`;
+          document.getElementById("spec-location").innerText = scene.location;
+          document.getElementById("spec-altitude").innerText = scene.altitude;
+          document.getElementById("extended-content-text").innerText = scene.extendedText;
+
+          const notesContainer = document.getElementById("notes-container");
+          notesContainer.innerHTML = scene.notes.map(note => `
+            <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider">
+              ${note}
+            </span>
+          `).join('');
+
+          // Always force collapse extended content when scene changes
+          isExpanded = false;
+          const container = document.getElementById("expanded-container");
+          container.style.height = '0px';
+          container.style.opacity = '0';
+          document.getElementById("btn-text").innerText = "Read the Story";
+          document.getElementById("arrow-icon").style.transform = "rotate(0deg)";
+        });
+
+        // 3. Cross-fade Background scenes
+        tl.to(`#bg-${currentIndex}`, {
+          opacity: 0,
+          scale: direction === 'down' ? 1.05 : 0.95,
+          duration: 0.9,
+          ease: "power3.inOut"
+        }, "bgTransition");
+
+        tl.to(`#bg-${targetIndex}`, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.inOut"
+        }, "bgTransition");
+
+        // 4. Fade in updated scene layout
+        tl.fromTo([
+          "#headline", 
+          "#paragraph", 
+          "#read-more-btn", 
+          "#spec-badge", 
+          "#spec-location", 
+          "#spec-altitude",
+          "#notes-container"
+        ], {
+          opacity: 0,
+          y: direction === 'down' ? 35 : -35
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.03,
+          ease: "power2.out"
+        });
+      }
+
+      // Initialize ScrollTrigger on panels
+      function initScrollTriggers() {
+        const panels = document.querySelectorAll('.panel');
+        panels.forEach((panel, i) => {
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => transitionToScene(i, 'down'),
+            onEnterBack: () => transitionToScene(i, 'up')
+          });
+        });
+      }
+
+      // Read More Expandable Block Handling
+      function initExpandToggle() {
+        const btn = document.getElementById('read-more-btn');
+        const container = document.getElementById('expanded-container');
+        const btnText = document.getElementById('btn-text');
+        const arrow = document.getElementById('arrow-icon');
+
+        btn.addEventListener('click', () => {
+          isExpanded = !isExpanded;
+
+          if (isExpanded) {
+            // Measure scroll height of internal story text
+            container.style.height = "auto";
+            const scrollHeight = container.scrollHeight;
+            container.style.height = "0px";
+            
+            // Force browser layout reflow to register the starting height of 0px
+            container.getBoundingClientRect();
+
+            // Animate height and opacity to create custom elastic expand
+            container.style.height = scrollHeight + "px";
+            container.style.opacity = "1";
+            btnText.innerText = "Close Chapter";
+            arrow.style.transform = "rotate(180deg)";
+          } else {
+            // Collapse back to zero
+            container.style.height = "0px";
+            container.style.opacity = "0";
+            btnText.innerText = "Read the Story";
+            arrow.style.transform = "rotate(0deg)";
+          }
+
+          // Force update Lenis height and recalculate active triggers immediately
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+            if (lenis) lenis.resize();
+          }, 300);
+        });
+      }
+
+      // Fire setup on load
+      window.addEventListener('DOMContentLoaded', () => {
+        initLenis();
+        initScrollTriggers();
+        initExpandToggle();
+      });
+    </script>
+  </body>
 </html>
