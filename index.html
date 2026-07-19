@@ -189,7 +189,7 @@
 }
 </style>
 <script>
-    gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
     const scenes = [
         {
@@ -224,6 +224,15 @@
         opacity:1
     });
 
+    // FIX 1: Explicitly load the first scene contents right away on page load
+    headline.innerHTML = scenes[0].title;
+    paragraph.innerHTML = scenes[0].text;
+    currentFullText = scenes[0].fullText || "";
+    if (currentFullText) {
+        readMoreBtn.style.display = "inline-block";
+        readMoreBtn.innerText = "Read More";
+    }
+
     panels.forEach((panel,index)=>{
         ScrollTrigger.create({
             trigger:panel,
@@ -251,11 +260,10 @@
             ease:"power2.out"
         });
         tl.call(()=>{
-            // set the short text
             headline.innerHTML=scenes[index].title;
             paragraph.innerHTML=scenes[index].text;
-            // save the full text for the click event
             currentFullText = scenes[index].fullText || "";
+            
             if (currentFullText) {
                 readMoreBtn.style.display = "inline-block";
                 readMoreBtn.innerText = "Read More";
@@ -266,63 +274,35 @@
 
         tl.fromTo(
             headline,
-            {
-                opacity:0,
-                y:50
-            },
-            {
-                opacity:1,
-                y:0,
-                duration:.8,
-                ease:"power3.out"
-            }
+            { opacity:0, y:50 },
+            { opacity:1, y:0, duration:.8, ease:"power3.out" }
         );
         tl.fromTo(
             paragraph,
-            {
-                opacity:0,
-                y:30
-            },
-            {
-                opacity:.82,
-                y:0,
-                duration:.8,
-                ease:"power3.out"
-            },
+            { opacity:0, y:30 },
+            { opacity:.82, y:0, duration:.8, ease:"power3.out" },
             "-=.45"
         );
         tl.fromTo(
             readMoreBtn,
-            {
-                opacity: 0,
-                y: 20,
-            },
-            { 
-                opacity: 1,
-                y: 0,
-                duration: .5,
-                ease: "power3.out"
-            },
-                "-=.6"
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: .5, ease: "power3.out" },
+            "-=.6"
         );
     }
 
+    // FIX 2: Evaluate innerText for cleaner toggle execution
     readMoreBtn.addEventListener("click", () => {
-        // Find the active scene object matching the active full text
         const activeScene = scenes.find(s => s.fullText === currentFullText);
-        
         if (!activeScene) return;
 
-        // Check if the paragraph text is currently matching the base text
-        if (paragraph.innerHTML === activeScene.text) {
-            // It's short, so append full text
+        if (readMoreBtn.innerText === "Read More") {
             paragraph.innerHTML = activeScene.text + " " + currentFullText;
-            readMoreBtn.innerHTML = "Read Less";
+            readMoreBtn.innerText = "Read Less";
             gsap.fromTo(paragraph, { opacity: 0.5 }, { opacity: 0.82, duration: 0.4 });
         } else {
-            // It's expanded, so restore short text
             paragraph.innerHTML = activeScene.text;
-            readMoreBtn.innerHTML = "Read More";
+            readMoreBtn.innerText = "Read More";
         }
     });
 
