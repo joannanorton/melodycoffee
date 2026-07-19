@@ -12,6 +12,7 @@
     <div class="bg active" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg')"></div>
     <div class="bg" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg')"></div>
     <div class="bg" style="background-image:url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg')"></div>
+    <div class="bg" style="background-image:url('img/greenbean.jpg')"></div>
 </div>
 <header>
 <div class="logo">MELODY COFFEE</div>
@@ -145,10 +146,11 @@
     }
     .panels{
         position:relative;
+        padding-bottom: 20vh;
     }
     .panel{
         width:100%;
-        height:100vh;
+        height:100svh;
     }
     @media(max-width:900px){
         header{
@@ -225,8 +227,8 @@
     panels.forEach((panel,index)=>{
         ScrollTrigger.create({
             trigger:panel,
-            start:"top center",
-            end:"bottom center",
+            start:"top 80%",
+            end:"bottom 20%",
             onEnter:()=>changeScene(index),
             onEnterBack:()=>changeScene(index)
         });
