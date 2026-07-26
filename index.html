@@ -69,86 +69,156 @@
         writing-mode: vertical-rl;
       }
 
-      /* Scrollytelling craft journey sections */
+      /* Pinned scrollytelling craft journey */
       #craft-journey {
-        background: #0F0E0D;
         position: relative;
         z-index: 25;
+        background: #0F0E0D;
       }
 
-      .craft-section {
-        min-height: 100vh;
+      .craft-stage {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background: #0F0E0D;
+      }
+
+      .craft-slide {
+        position: absolute;
+        inset: 0;
         display: flex;
         align-items: center;
-        position: relative;
-        overflow: hidden;
-        padding: 6rem 1.5rem;
-      }
-
-      @media (min-width: 1024px) {
-        .craft-section {
-          padding: 0 5rem 0 6rem;
-        }
-      }
-
-      .craft-text-box {
-        position: relative;
-        z-index: 10;
-        max-width: 28rem;
-        padding: 2rem 2.25rem;
-        border-radius: 0.75rem;
-        background: rgba(15, 14, 13, 0);
-        
-      }
-
-      .craft-text-box h3 {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.5rem, 3vw, 2.25rem);
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        line-height: 1.15;
-        color: #fff;
-        margin-bottom: 1.25rem;
-        text-align: center;
-      }
-
-      .craft-text-box p {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.75;
-        color: rgba(230, 225, 214, 0.88);
-        font-weight: 300;
-        text-align: center;
-      }
-
-      .craft-image-wrap {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: min(58vw, 720px);
-        height: min(75vh, 640px);
-        z-index: 5;
+        padding: 5rem 1.25rem 6rem;
+        opacity: 0;
         pointer-events: none;
       }
 
+      @media (min-width: 1024px) {
+        .craft-slide {
+          padding: 0 5rem 0 6.5rem;
+        }
+      }
+
+      .craft-text-wrap {
+        position: relative;
+        z-index: 10;
+        max-width: min(34rem, 46vw);
+        flex-shrink: 0;
+      }
+
+      /* Dark radial fade — adapts to any text length, no box border */
+      .craft-text-fade {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-55%, -50%);
+        width: max(140%, 22rem);
+        height: max(160%, 100%);
+        min-height: 14rem;
+        background: radial-gradient(
+          ellipse 85% 90% at 28% 50%,
+          rgba(15, 14, 13, 0.98) 0%,
+          rgba(15, 14, 13, 0.82) 38%,
+          rgba(15, 14, 13, 0.45) 62%,
+          rgba(15, 14, 13, 0) 82%
+        );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .craft-text-content h3 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: 1.2;
+        color: #fff;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+
+      .craft-text-content p {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: clamp(0.82rem, 1.1vw, 0.92rem);
+        line-height: 1.8;
+        color: rgba(230, 225, 214, 0.86);
+        font-weight: 300;
+        text-align: left;
+      }
+
+      .craft-image-wrap {
+        position: flex;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: min(54vw, 700px);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        z-index: 5;
+        pointer-events: none;
+        padding-right: 1rem;
+      }
+
+      /* PNG-friendly: preserve transparent padding, no crop */
       .craft-image-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        object-position: center center;
+      }
+
+      .craft-section-number {
+        position: absolute;
+        top: 5.5rem;
+        left: 1.25rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        color: rgba(230, 225, 214, 0.35);
+        text-transform: uppercase;
+        z-index: 15;
+      }
+
+      @media (min-width: 1024px) {
+        .craft-section-number {
+          left: 6.5rem;
+          top: 6rem;
+        }
       }
 
       @media (max-width: 768px) {
-        .craft-section {
+        .craft-slide {
           flex-direction: column;
           justify-content: center;
-          gap: 2rem;
-          padding-top: 8rem;
-          padding-bottom: 4rem;
+          gap: 1.5rem;
+          padding-top: 7rem;
+        }
+
+        .craft-text-wrap {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        .craft-text-fade {
+          width: 130%;
+          height: 180%;
+          background: radial-gradient(
+            ellipse 90% 80% at 50% 45%,
+            rgba(15, 14, 13, 0.98) 0%,
+            rgba(15, 14, 13, 0.7) 50%,
+            rgba(15, 14, 13, 0) 78%
+          );
+        }
+
+        .craft-text-content h3,
+        .craft-text-content p {
+          text-align: center;
         }
 
         .craft-image-wrap {
@@ -157,24 +227,9 @@
           right: auto;
           transform: none;
           width: 100%;
-          height: 280px;
-        }
-      }
-
-      .craft-section-number {
-        position: absolute;
-        top: 2rem;
-        left: 1.5rem;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.3em;
-        color: rgba(230, 225, 214, 0.4);
-        text-transform: uppercase;
-      }
-
-      @media (min-width: 1024px) {
-        .craft-section-number {
-          left: 6rem;
+          height: min(42vh, 320px);
+          justify-content: center;
+          padding-right: 0;
         }
       }
     </style>
@@ -420,101 +475,118 @@
       <div class="panel w-full" style="height: 120vh;"></div>
     </div>
 
-    <!-- 9. SCROLLYTELLING CRAFT JOURNEY (text from left, image from right) -->
+    <!-- 9. PINNED SCROLLYTELLING CRAFT JOURNEY -->
     <section id="craft-journey" aria-label="Coffee craft journey">
-      <div class="craft-section" data-craft="0">
-        <span class="craft-section-number">Process 01</span>
-        <div class="craft-text-box craft-text">
-          <h3>Cherry Selection &amp; Harvest</h3>
-          <p>
-            Only fully ripened, single-variety cherries with optimal Brix levels are hand-picked at peak maturity.
-            Each lot is traced to its micro-plot — a step paramount to achieving an exquisite flavor profile
-            and exceptional cup clarity.
-          </p>
-        </div>
-        <div class="craft-image-wrap craft-image">
-          <img
-            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg"
-            alt="Coffee cherry harvest in the highlands"
-            loading="lazy"
-          />
-        </div>
-      </div>
+      <div class="craft-stage">
+        <article class="craft-slide" data-slide="0">
+          <span class="craft-section-number">Process 01</span>
+          <div class="craft-text-wrap">
+            <div class="craft-text-fade" aria-hidden="true"></div>
+            <div class="craft-text-content">
+              <h3>Cherry Selection &amp; Harvest</h3>
+              <p>
+                Only fully ripened, single-variety cherries with optimal Brix levels are hand-picked at peak maturity.
+                Each lot is traced to its micro-plot — a step paramount to achieving an exquisite flavor profile
+                and exceptional cup clarity.
+              </p>
+            </div>
+          </div>
+          <div class="craft-image-wrap">
+            <img
+              src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg"
+              alt="Coffee cherry harvest in the highlands"
+              loading="lazy"
+            />
+          </div>
+        </article>
 
-      <div class="craft-section" data-craft="1">
-        <span class="craft-section-number">Process 02</span>
-        <div class="craft-text-box craft-text">
-          <h3>Agroforestry &amp; Soil Care</h3>
-          <p>
-            Through agroforestry, we nurture biodiversity beneath the canopy. Healthy soil and balanced ecosystems
-            allow native micro-flora to thrive — the silent foundation behind every complex, layered cup
-            Melody Coffee produces.
-          </p>
-        </div>
-        <div class="craft-image-wrap craft-image">
-          <img
-            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg"
-            alt="Agroforestry coffee farm landscape"
-            loading="lazy"
-          />
-        </div>
-      </div>
+        <article class="craft-slide" data-slide="1">
+          <span class="craft-section-number">Process 02</span>
+          <div class="craft-text-wrap">
+            <div class="craft-text-fade" aria-hidden="true"></div>
+            <div class="craft-text-content">
+              <h3>Agroforestry &amp; Soil Care</h3>
+              <p>
+                Through agroforestry, we nurture biodiversity beneath the canopy. Healthy soil and balanced ecosystems
+                allow native micro-flora to thrive — the silent foundation behind every complex, layered cup
+                Melody Coffee produces.
+              </p>
+            </div>
+          </div>
+          <div class="craft-image-wrap">
+            <img
+              src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg"
+              alt="Agroforestry coffee farm landscape"
+              loading="lazy"
+            />
+          </div>
+        </article>
 
-      <div class="craft-section" data-craft="2">
-        <span class="craft-section-number">Process 03</span>
-        <div class="craft-text-box craft-text">
-          <h3>Organic Fermentation</h3>
-          <p>
-            Science meets alchemy in our fermentation chambers. By utilizing native micro-flora, we ferment
-            under controlled anaerobic environments — coaxing out deep, complex notes and a silky body
-            that lingers on the palate.
-          </p>
-        </div>
-        <div class="craft-image-wrap craft-image">
-          <img
-            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg"
-            alt="Organic fermentation process with native fungi"
-            loading="lazy"
-          />
-        </div>
-      </div>
+        <article class="craft-slide" data-slide="2">
+          <span class="craft-section-number">Process 03</span>
+          <div class="craft-text-wrap">
+            <div class="craft-text-fade" aria-hidden="true"></div>
+            <div class="craft-text-content">
+              <h3>Organic Fermentation</h3>
+              <p>
+                Science meets alchemy in our fermentation chambers. By utilizing native micro-flora, we ferment
+                under controlled anaerobic environments — coaxing out deep, complex notes and a silky body
+                that lingers on the palate.
+              </p>
+            </div>
+          </div>
+          <div class="craft-image-wrap">
+            <img
+              src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg"
+              alt="Organic fermentation process with native fungi"
+              loading="lazy"
+            />
+          </div>
+        </article>
 
-      <div class="craft-section" data-craft="3">
-        <span class="craft-section-number">Process 04</span>
-        <div class="craft-text-box craft-text">
-          <h3>Sun Drying &amp; Resting</h3>
-          <p>
-            Dried slowly on raised African bamboo beds, our green beans rest until they reach a perfect
-            11% moisture level. Resilient, vibrant, and bursting with aromatic potential — each bean
-            is hand-sorted twice to remove any defect.
-          </p>
-        </div>
-        <div class="craft-image-wrap craft-image">
-          <img
-            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/gbbg.jpg"
-            alt="Green coffee beans drying on raised beds"
-            loading="lazy"
-          />
-        </div>
-      </div>
+        <article class="craft-slide" data-slide="3">
+          <span class="craft-section-number">Process 04</span>
+          <div class="craft-text-wrap">
+            <div class="craft-text-fade" aria-hidden="true"></div>
+            <div class="craft-text-content">
+              <h3>Sun Drying &amp; Resting</h3>
+              <p>
+                Dried slowly on raised African bamboo beds, our green beans rest until they reach a perfect
+                11% moisture level. Resilient, vibrant, and bursting with aromatic potential — each bean
+                is hand-sorted twice to remove any defect.
+              </p>
+            </div>
+          </div>
+          <div class="craft-image-wrap">
+            <img
+              src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/gbbg.jpg"
+              alt="Green coffee beans drying on raised beds"
+              loading="lazy"
+            />
+          </div>
+        </article>
 
-      <div class="craft-section" data-craft="4">
-        <span class="craft-section-number">Process 05</span>
-        <div class="craft-text-box craft-text">
-          <h3>Cupping &amp; Excellence Control</h3>
-          <p>
-            Every lot undergoes rigorous sensory evaluation and SCA-standard cupping. Advanced analysis
-            certifies each micro-lot as true specialty grade — a product of meticulous care from seed
-            to the final, golden pour in your cup.
-          </p>
-        </div>
-        <div class="craft-image-wrap craft-image">
-          <img
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"
-            alt="Specialty coffee cupping and quality control"
-            loading="lazy"
-          />
-        </div>
+        <article class="craft-slide" data-slide="4">
+          <span class="craft-section-number">Process 05</span>
+          <div class="craft-text-wrap">
+            <div class="craft-text-fade" aria-hidden="true"></div>
+            <div class="craft-text-content">
+              <h3>Cupping &amp; Excellence Control</h3>
+              <p>
+                Every lot undergoes rigorous sensory evaluation and SCA-standard cupping. Advanced analysis
+                certifies each micro-lot as true specialty grade — a product of meticulous care from seed
+                to the final, golden pour in your cup.
+              </p>
+            </div>
+          </div>
+          <div class="craft-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"
+              alt="Specialty coffee cupping and quality control"
+              loading="lazy"
+            />
+          </div>
+        </article>
       </div>
     </section>
 
@@ -728,19 +800,31 @@
         });
       }
 
-      // Scrollytelling: text slides from left, image from right
+      // Pinned scrollytelling: page stays still, slides animate in/out
       function initCraftAnimations() {
         const craftJourney = document.getElementById('craft-journey');
+        const craftStage = document.querySelector('.craft-stage');
         const heroOverlay = document.getElementById('hero-overlay');
         const fixedBg = document.getElementById('fixed-bg');
-        const craftSections = document.querySelectorAll('.craft-section');
+        const slides = gsap.utils.toArray('.craft-slide');
+        const slideCount = slides.length;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const slideOffset = isMobile ? 70 : 140;
 
-        // Fade out hero overlay & fixed backgrounds when entering craft journey
+        slides.forEach((slide, i) => {
+          const text = slide.querySelector('.craft-text-content');
+          const image = slide.querySelector('.craft-image-wrap');
+          gsap.set(slide, { opacity: 0, zIndex: 1 });
+          gsap.set(text, { x: -slideOffset, opacity: 0 });
+          gsap.set(image, { x: slideOffset, opacity: 0 });
+        });
+
+        // Fade hero out just before craft journey pins
         ScrollTrigger.create({
           trigger: craftJourney,
-          start: 'top 85%',
-          end: 'top 50%',
-          scrub: 0.5,
+          start: 'top 90%',
+          end: 'top top',
+          scrub: 0.6,
           onUpdate: (self) => {
             const opacity = 1 - self.progress;
             if (heroOverlay) heroOverlay.style.opacity = opacity;
@@ -752,49 +836,66 @@
           }
         });
 
-        craftSections.forEach((section) => {
-          const textEl = section.querySelector('.craft-text');
-          const imageEl = section.querySelector('.craft-image');
-          const slideOffset = window.matchMedia('(max-width: 768px)').matches ? 60 : 120;
-
-          gsap.set(textEl, { x: -slideOffset, opacity: 0 });
-          gsap.set(imageEl, { x: slideOffset, opacity: 0 });
-
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 80%',
-              end: 'top 25%',
-              scrub: 1.2,
-            }
-          });
-
-          tl.to(textEl, {
-            x: 0,
-            opacity: 1,
-            ease: 'power2.out',
-            duration: 1
-          }, 0);
-
-          tl.to(imageEl, {
-            x: 0,
-            opacity: 1,
-            ease: 'power2.out',
-            duration: 1
-          }, 0);
-
-          // Subtle parallax on image while section is in view
-          gsap.to(imageEl.querySelector('img'), {
-            y: -40,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.5
-            }
-          });
+        const masterTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: craftJourney,
+            start: 'top top',
+            end: `+=${slideCount * 100}%`,
+            pin: craftStage,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          }
         });
+
+        slides.forEach((slide, i) => {
+          const text = slide.querySelector('.craft-text-content');
+          const image = slide.querySelector('.craft-image-wrap');
+          const segmentStart = i;
+          const enterAt = i > 0 ? segmentStart + 0.28 : segmentStart;
+
+          if (i > 0) {
+            const prevSlide = slides[i - 1];
+            const prevText = prevSlide.querySelector('.craft-text-content');
+            const prevImage = prevSlide.querySelector('.craft-image-wrap');
+
+            masterTl.to(prevText, {
+              x: -slideOffset,
+              opacity: 0,
+              ease: 'power2.in',
+              duration: 0.28
+            }, segmentStart);
+
+            masterTl.to(prevImage, {
+              x: slideOffset,
+              opacity: 0,
+              ease: 'power2.in',
+              duration: 0.28
+            }, segmentStart);
+
+            masterTl.set(prevSlide, { opacity: 0, zIndex: 1 }, segmentStart + 0.28);
+          }
+
+          masterTl.set(slide, { opacity: 1, zIndex: 2 }, enterAt);
+
+          masterTl.fromTo(text,
+            { x: -slideOffset, opacity: 0 },
+            { x: 0, opacity: 1, ease: 'power2.out', duration: 0.38 },
+            enterAt
+          );
+
+          masterTl.fromTo(image,
+            { x: slideOffset, opacity: 0 },
+            { x: 0, opacity: 1, ease: 'power2.out', duration: 0.38 },
+            enterAt
+          );
+        });
+
+        // Pad timeline so last slide holds before unpinning
+        const remaining = slideCount - masterTl.duration();
+        if (remaining > 0) {
+          masterTl.to({}, { duration: remaining });
+        }
       }
 
       // Read More Expandable Block Handling
