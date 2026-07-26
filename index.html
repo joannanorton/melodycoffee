@@ -68,12 +68,120 @@
       .vertical-text {
         writing-mode: vertical-rl;
       }
+
+      /* Scrollytelling craft journey sections */
+      #craft-journey {
+        background: #0F0E0D;
+        position: relative;
+        z-index: 25;
+      }
+
+      .craft-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding: 6rem 1.5rem;
+      }
+
+      @media (min-width: 1024px) {
+        .craft-section {
+          padding: 0 5rem 0 6rem;
+        }
+      }
+
+      .craft-text-box {
+        position: relative;
+        z-index: 10;
+        max-width: 28rem;
+        padding: 2rem 2.25rem;
+        border: 1px solid rgba(230, 225, 214, 0.35);
+        border-radius: 0.75rem;
+        background: rgba(15, 14, 13, 0.85);
+        backdrop-filter: blur(8px);
+      }
+
+      .craft-text-box h3 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        line-height: 1.15;
+        color: #fff;
+        margin-bottom: 1.25rem;
+      }
+
+      .craft-text-box p {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.75;
+        color: rgba(230, 225, 214, 0.88);
+        font-weight: 300;
+      }
+
+      .craft-image-wrap {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: min(58vw, 720px);
+        height: min(75vh, 640px);
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .craft-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+      }
+
+      @media (max-width: 768px) {
+        .craft-section {
+          flex-direction: column;
+          justify-content: center;
+          gap: 2rem;
+          padding-top: 8rem;
+          padding-bottom: 4rem;
+        }
+
+        .craft-image-wrap {
+          position: relative;
+          top: auto;
+          right: auto;
+          transform: none;
+          width: 100%;
+          height: 280px;
+        }
+      }
+
+      .craft-section-number {
+        position: absolute;
+        top: 2rem;
+        left: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        color: rgba(230, 225, 214, 0.4);
+        text-transform: uppercase;
+      }
+
+      @media (min-width: 1024px) {
+        .craft-section-number {
+          left: 6rem;
+        }
+      }
     </style>
   </head>
   <body class="selection:bg-[#E6E1D6]/20 selection:text-[#E6E1D6] font-sans antialiased text-[#E6E1D6]">
     
     <!-- 1. FIXED BACKGROUND IMAGES CONTAINER -->
-    <div class="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0 bg-[#0F0E0D]">
+    <div id="fixed-bg" class="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0 bg-[#0F0E0D]">
       <!-- Scene 1 Background -->
       <div
         id="bg-0"
@@ -179,7 +287,7 @@
     </header>
 
     <!-- 5. CENTERED FIXED TEXT CONTENT OVERLAY -->
-    <div class="fixed inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-4 md:px-6">
+    <div id="hero-overlay" class="fixed inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-4 md:px-6">
       <div class="max-w-xl w-full text-center pointer-events-auto relative p-4 md:p-8">
         
         <!-- Micro spec details -->
@@ -237,7 +345,10 @@
               id="extended-content-text" 
               class="font-sans text-[#E6E1D6]/95 text-xs md:text-sm leading-relaxed text-left font-light italic"
             >
-              Kami adalah micro lot coffee processor yang sangat percaya kekayaan Biodiversity tanah dan kondisi alam yang terjaga menghasilkan kopi terbaik, pelajari lebih lanjut perkebunan kami
+              Kami adalah micro lot coffee processor yang sangat percaya kekayaan 
+              Biodiversity tanah dan kondisi alam yang 
+              terjaga menghasilkan kopi terbaik, pelajari lebih lanjut perkebunan kami 
+              <a href="https://joannanorton.github.io/melodycoffee/about.html"><p style="color:rgb(187, 45, 2);"><u><b>Klik disini</u></a></p></b>
             </p>
           </div>
         </div>
@@ -308,6 +419,105 @@
       <div class="panel w-full" style="height: 120vh;"></div>
     </div>
 
+    <!-- 9. SCROLLYTELLING CRAFT JOURNEY (text from left, image from right) -->
+    <section id="craft-journey" aria-label="Coffee craft journey">
+      <div class="craft-section" data-craft="0">
+        <span class="craft-section-number">Process 01</span>
+        <div class="craft-text-box craft-text">
+          <h3>Cherry Selection &amp; Harvest</h3>
+          <p>
+            Only fully ripened, single-variety cherries with optimal Brix levels are hand-picked at peak maturity.
+            Each lot is traced to its micro-plot — a step paramount to achieving an exquisite flavor profile
+            and exceptional cup clarity.
+          </p>
+        </div>
+        <div class="craft-image-wrap craft-image">
+          <img
+            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg"
+            alt="Coffee cherry harvest in the highlands"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="craft-section" data-craft="1">
+        <span class="craft-section-number">Process 02</span>
+        <div class="craft-text-box craft-text">
+          <h3>Agroforestry &amp; Soil Care</h3>
+          <p>
+            Through agroforestry, we nurture biodiversity beneath the canopy. Healthy soil and balanced ecosystems
+            allow native micro-flora to thrive — the silent foundation behind every complex, layered cup
+            Melody Coffee produces.
+          </p>
+        </div>
+        <div class="craft-image-wrap craft-image">
+          <img
+            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/kebonup.jpg"
+            alt="Agroforestry coffee farm landscape"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="craft-section" data-craft="2">
+        <span class="craft-section-number">Process 03</span>
+        <div class="craft-text-box craft-text">
+          <h3>Organic Fermentation</h3>
+          <p>
+            Science meets alchemy in our fermentation chambers. By utilizing native micro-flora, we ferment
+            under controlled anaerobic environments — coaxing out deep, complex notes and a silky body
+            that lingers on the palate.
+          </p>
+        </div>
+        <div class="craft-image-wrap craft-image">
+          <img
+            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/fungiup.jpg"
+            alt="Organic fermentation process with native fungi"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="craft-section" data-craft="3">
+        <span class="craft-section-number">Process 04</span>
+        <div class="craft-text-box craft-text">
+          <h3>Sun Drying &amp; Resting</h3>
+          <p>
+            Dried slowly on raised African bamboo beds, our green beans rest until they reach a perfect
+            11% moisture level. Resilient, vibrant, and bursting with aromatic potential — each bean
+            is hand-sorted twice to remove any defect.
+          </p>
+        </div>
+        <div class="craft-image-wrap craft-image">
+          <img
+            src="https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/gbbg.jpg"
+            alt="Green coffee beans drying on raised beds"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="craft-section" data-craft="4">
+        <span class="craft-section-number">Process 05</span>
+        <div class="craft-text-box craft-text">
+          <h3>Cupping &amp; Excellence Control</h3>
+          <p>
+            Every lot undergoes rigorous sensory evaluation and SCA-standard cupping. Advanced analysis
+            certifies each micro-lot as true specialty grade — a product of meticulous care from seed
+            to the final, golden pour in your cup.
+          </p>
+        </div>
+        <div class="craft-image-wrap craft-image">
+          <img
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"
+            alt="Specialty coffee cupping and quality control"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+
     <!-- GSAP, ScrollTrigger & Lenis Smooth Scroll via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -324,7 +534,7 @@
           id: 1,
           headline: "Melody Coffee",
           paragraph: "Micro lot Coffee processor",
-          extendedText: "Kami adalah micro lot coffee processor yang sangat percaya kekayaan Biodiversity tanah dan kondisi alam yang terjaga menghasilkan kopi terbaik, pelajari lebih lanjut perkebunan kami",
+          extendedText: "Kami adalah micro lot coffee processor yang sangat percaya kekayaan Biodiversity tanah dan kondisi alam yang terjaga menghasilkan kopi terbaik, pelajari lebih lanjut perkebunan kami Klik disini",
           location: "Bandung, Jawa Barat",
           altitude: "1200 - 1400 meters ASL",
           notes: ["", "", ""]
@@ -517,6 +727,75 @@
         });
       }
 
+      // Scrollytelling: text slides from left, image from right
+      function initCraftAnimations() {
+        const craftJourney = document.getElementById('craft-journey');
+        const heroOverlay = document.getElementById('hero-overlay');
+        const fixedBg = document.getElementById('fixed-bg');
+        const craftSections = document.querySelectorAll('.craft-section');
+
+        // Fade out hero overlay & fixed backgrounds when entering craft journey
+        ScrollTrigger.create({
+          trigger: craftJourney,
+          start: 'top 85%',
+          end: 'top 50%',
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const opacity = 1 - self.progress;
+            if (heroOverlay) heroOverlay.style.opacity = opacity;
+            if (fixedBg) fixedBg.style.opacity = opacity;
+          },
+          onLeaveBack: () => {
+            if (heroOverlay) heroOverlay.style.opacity = '1';
+            if (fixedBg) fixedBg.style.opacity = '1';
+          }
+        });
+
+        craftSections.forEach((section) => {
+          const textEl = section.querySelector('.craft-text');
+          const imageEl = section.querySelector('.craft-image');
+          const slideOffset = window.matchMedia('(max-width: 768px)').matches ? 60 : 120;
+
+          gsap.set(textEl, { x: -slideOffset, opacity: 0 });
+          gsap.set(imageEl, { x: slideOffset, opacity: 0 });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'top 25%',
+              scrub: 1.2,
+            }
+          });
+
+          tl.to(textEl, {
+            x: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            duration: 1
+          }, 0);
+
+          tl.to(imageEl, {
+            x: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            duration: 1
+          }, 0);
+
+          // Subtle parallax on image while section is in view
+          gsap.to(imageEl.querySelector('img'), {
+            y: -40,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.5
+            }
+          });
+        });
+      }
+
       // Read More Expandable Block Handling
       function initExpandToggle() {
         const btn = document.getElementById('read-more-btn');
@@ -561,6 +840,7 @@
       window.addEventListener('DOMContentLoaded', () => {
         initLenis();
         initScrollTriggers();
+        initCraftAnimations();
         initExpandToggle();
       });
     </script>
