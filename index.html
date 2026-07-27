@@ -76,52 +76,73 @@
         background: #0F0E0D;
       }
 
+      /* ---------- STAGE ---------- */
       .craft-stage {
         position: relative;
         width: 100%;
-        height: 100vh;
+        height: 100vh;   /* fallback untuk browser lama */
+        height: 100dvh;  /* Safari iOS & Chrome Android: tinggi layar sebenarnya */
         overflow: hidden;
         background: #0F0E0D;
       }
 
+      /* ---------- DASAR (berlaku di SEMUA ukuran = mode overlap) ---------- */
       .craft-slide {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
-        padding: 5rem 1.25rem 6rem;
+        justify-content: flex-start;
+        padding: 5rem 1.5rem 6rem;
         opacity: 0;
         pointer-events: none;
       }
 
-      @media (min-width: 1024px) {
-        .craft-slide {
-          padding: 0 5rem 0 6.5rem;
-        }
+      /* Gambar DIKELUARKAN dari alur flex -> tidak mendorong teks, jadi latar */
+      .craft-image-wrap {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;              /* di BAWAH teks */
+        pointer-events: none;
+        padding: 0;
+      }
+
+      .craft-image-wrap img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;     /* PNG transparan tidak terpotong */
+        object-position: center center;
       }
 
       .craft-text-wrap {
         position: relative;
-        z-index: 10;
-        max-width: min(34rem, 46vw);
+        z-index: 10;             /* selalu DI ATAS gambar */
+        width: 100%;
+        max-width: 100%;
         flex-shrink: 0;
       }
 
-      /* Dark radial fade — adapts to any text length, no box border */
+      /* Fade gelap di belakang teks supaya tetap terbaca di atas gambar */
       .craft-text-fade {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-55%, -50%);
-        width: max(140%, 22rem);
-        height: max(160%, 100%);
-        min-height: 14rem;
+        transform: translate(-50%, -50%);
+        width: max(160%, 26rem);
+        height: max(200%, 18rem);
         background: radial-gradient(
-          ellipse 85% 90% at 28% 50%,
-          rgba(15, 14, 13, 0.98) 0%,
-          rgba(15, 14, 13, 0.82) 38%,
-          rgba(15, 14, 13, 0.45) 62%,
-          rgba(15, 14, 13, 0) 82%
+          ellipse 90% 80% at 50% 50%,
+          rgba(15, 14, 13, 0.96) 0%,
+          rgba(15, 14, 13, 0.78) 45%,
+          rgba(15, 14, 13, 0) 80%
         );
         pointer-events: none;
         z-index: -1;
@@ -148,35 +169,10 @@
         text-align: left;
       }
 
-      .craft-image-wrap {
-        position: flex;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: min(54vw, 700px);
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        z-index: 5;
-        pointer-events: none;
-        padding-right: 1rem;
-      }
-
-      /* PNG-friendly: preserve transparent padding, no crop */
-      .craft-image-wrap img {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        object-position: center center;
-      }
-
       .craft-section-number {
         position: absolute;
         top: 5.5rem;
-        left: 1.25rem;
+        left: 1.5rem;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.65rem;
         letter-spacing: 0.3em;
@@ -185,51 +181,49 @@
         z-index: 15;
       }
 
+      /* ---------- DESKTOP >= 1024px: teks KIRI, gambar KANAN (bersebelahan) ---------- */
       @media (min-width: 1024px) {
-        .craft-section-number {
-          left: 6.5rem;
-          top: 6rem;
-        }
-      }
-
-      @media (max-width: 768px) {
         .craft-slide {
-          flex-direction: column;
-          justify-content: center;
-          gap: 1.5rem;
-          padding-top: 7rem;
+          padding: 0 5rem 0 6.5rem;
         }
 
         .craft-text-wrap {
-          max-width: 100%;
-          width: 100%;
+          max-width: min(34rem, 46vw);
         }
 
         .craft-text-fade {
-          width: 130%;
-          height: 180%;
+          transform: translate(-55%, -50%);
+          width: max(140%, 22rem);
+          height: max(160%, 100%);
           background: radial-gradient(
-            ellipse 90% 80% at 50% 45%,
+            ellipse 85% 90% at 28% 50%,
             rgba(15, 14, 13, 0.98) 0%,
-            rgba(15, 14, 13, 0.7) 50%,
-            rgba(15, 14, 13, 0) 78%
+            rgba(15, 14, 13, 0.82) 38%,
+            rgba(15, 14, 13, 0.45) 62%,
+            rgba(15, 14, 13, 0) 82%
           );
         }
 
-        .craft-text-content h3,
-        .craft-text-content p {
-          text-align: center;
+        .craft-image-wrap {
+          left: auto;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: min(54vw, 700px);
+          height: auto;
+          justify-content: flex-end;
+          padding-right: 1rem;
+          z-index: 5;
         }
 
-        .craft-image-wrap {
-          position: relative;
-          top: auto;
-          right: auto;
-          transform: none;
-          width: 100%;
-          height: min(42vh, 320px);
-          justify-content: center;
-          padding-right: 0;
+        .craft-image-wrap img {
+          width: auto;
+          height: auto;
+        }
+
+        .craft-section-number {
+          left: 6.5rem;
+          top: 6rem;
         }
       }
     </style>
