@@ -124,28 +124,27 @@
 
       .craft-text-wrap {
         position: relative;
-        z-index: 10;             /* selalu DI ATAS gambar */
+        z-index: 10;             /* selalu DI ATAS gambar & fade */
         width: 100%;
         max-width: 100%;
         flex-shrink: 0;
       }
 
-      /* Fade gelap di belakang teks supaya tetap terbaca di atas gambar */
+      /* Fade gelap: menutupi SELURUH slide supaya tidak ada tepi kotak yang terlihat */
       .craft-text-fade {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: max(160%, 26rem);
-        height: max(200%, 18rem);
-        background: radial-gradient(
-          ellipse 90% 80% at 50% 50%,
-          rgba(15, 14, 13, 0.96) 0%,
-          rgba(15, 14, 13, 0.78) 45%,
-          rgba(15, 14, 13, 0) 80%
-        );
+        inset: 0;
         pointer-events: none;
-        z-index: -1;
+        z-index: 6;
+        background:
+          radial-gradient(
+            ellipse 85% 60% at 50% 52%,
+            rgba(15, 14, 13, 0.92) 0%,
+            rgba(15, 14, 13, 0.72) 30%,
+            rgba(15, 14, 13, 0.38) 55%,
+            rgba(15, 14, 13, 0.12) 75%,
+            rgba(15, 14, 13, 0) 100%
+          );
       }
 
       .craft-text-content h3 {
@@ -156,6 +155,7 @@
         text-transform: uppercase;
         line-height: 1.2;
         color: #fff;
+        text-shadow: 0 2px 18px rgba(15, 14, 13, 0.85);
         margin-bottom: 1rem;
         text-align: left;
       }
@@ -165,6 +165,7 @@
         font-size: clamp(0.82rem, 1.1vw, 0.92rem);
         line-height: 1.8;
         color: rgba(230, 225, 214, 0.86);
+        text-shadow: 0 1px 14px rgba(15, 14, 13, 0.9);
         font-weight: 300;
         text-align: left;
       }
@@ -192,15 +193,13 @@
         }
 
         .craft-text-fade {
-          transform: translate(-55%, -50%);
-          width: max(140%, 22rem);
-          height: max(160%, 100%);
           background: radial-gradient(
-            ellipse 85% 90% at 28% 50%,
-            rgba(15, 14, 13, 0.98) 0%,
-            rgba(15, 14, 13, 0.82) 38%,
-            rgba(15, 14, 13, 0.45) 62%,
-            rgba(15, 14, 13, 0) 82%
+            ellipse 60% 85% at 24% 50%,
+            rgba(15, 14, 13, 0.94) 0%,
+            rgba(15, 14, 13, 0.76) 32%,
+            rgba(15, 14, 13, 0.4) 58%,
+            rgba(15, 14, 13, 0.12) 80%,
+            rgba(15, 14, 13, 0) 100%
           );
         }
 
@@ -236,7 +235,7 @@
       <div
         id="bg-0"
         class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[1.5s]"
-        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ganganism.jpg'); opacity: 1; transform: scale(1);"
+        style="background-image: url('https://raw.githubusercontent.com/joannanorton/melodycoffee/refs/heads/main/img/ggs.jpg'); opacity: 1; transform: scale(1);"
       ></div>
       <!-- Scene 2 Background -->
       <div
@@ -320,9 +319,11 @@
     <header class="fixed top-0 left-0 lg:left-[80px] right-0 lg:right-[80px] h-[80px] z-40 px-6 md:px-12 flex items-center justify-between select-none">
       <div class="flex items-center gap-3 drop-shadow-md">
         <div>
+          <a href="https://joannanorton.github.io/melodycoffee/index.html">
           <h1 class="font-serif text-lg md:text-xl font-medium tracking-normal text-[#E6E1D6]">
             Melody Coffee
           </h1>
+          </a>
         </div>
       </div>
 
@@ -474,8 +475,8 @@
       <div class="craft-stage">
         <article class="craft-slide" data-slide="0">
           <span class="craft-section-number">Process 01</span>
+          <div class="craft-text-fade" aria-hidden="true"></div>
           <div class="craft-text-wrap">
-            <div class="craft-text-fade" aria-hidden="true"></div>
             <div class="craft-text-content">
               <h3>Cherry Selection &amp; Harvest</h3>
               <p>
@@ -496,8 +497,8 @@
 
         <article class="craft-slide" data-slide="1">
           <span class="craft-section-number">Process 02</span>
+          <div class="craft-text-fade" aria-hidden="true"></div>
           <div class="craft-text-wrap">
-            <div class="craft-text-fade" aria-hidden="true"></div>
             <div class="craft-text-content">
               <h3>Agroforestry &amp; Soil Care</h3>
               <p>
@@ -518,8 +519,8 @@
 
         <article class="craft-slide" data-slide="2">
           <span class="craft-section-number">Process 03</span>
+          <div class="craft-text-fade" aria-hidden="true"></div>
           <div class="craft-text-wrap">
-            <div class="craft-text-fade" aria-hidden="true"></div>
             <div class="craft-text-content">
               <h3>Organic Fermentation</h3>
               <p>
@@ -540,8 +541,8 @@
 
         <article class="craft-slide" data-slide="3">
           <span class="craft-section-number">Process 04</span>
+          <div class="craft-text-fade" aria-hidden="true"></div>
           <div class="craft-text-wrap">
-            <div class="craft-text-fade" aria-hidden="true"></div>
             <div class="craft-text-content">
               <h3>Sun Drying &amp; Resting</h3>
               <p>
@@ -562,8 +563,8 @@
 
         <article class="craft-slide" data-slide="4">
           <span class="craft-section-number">Process 05</span>
+          <div class="craft-text-fade" aria-hidden="true"></div>
           <div class="craft-text-wrap">
-            <div class="craft-text-fade" aria-hidden="true"></div>
             <div class="craft-text-content">
               <h3>Cupping &amp; Excellence Control</h3>
               <p>
