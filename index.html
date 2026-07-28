@@ -225,6 +225,15 @@
           top: 6rem;
         }
       }
+
+      .__web-inspector-hide-shortcut__ {
+        display: none !important;
+      }
+
+      #read-more-btn {
+        display: none !important;
+      }
+
     </style>
   </head>
   <body class="selection:bg-[#E6E1D6]/20 selection:text-[#E6E1D6] font-sans antialiased text-[#E6E1D6]">
@@ -342,24 +351,6 @@
       <div class="max-w-xl w-full text-center pointer-events-auto relative p-4 md:p-8">
         
         <!-- Micro spec details -->
-        <div class="flex items-center justify-center gap-3 mb-6 flex-wrap drop-shadow-lg">
-          <span 
-            id="spec-badge" 
-            class="px-3 py-1 bg-[#E6E1D6]/15 border border-[#E6E1D6]/30 text-[9px] font-mono tracking-[0.25em] uppercase text-[#E6E1D6] rounded-none"
-          >
-            MOVEMENT 01
-          </span>
-          <div class="flex items-center gap-1.5 text-[#E6E1D6] text-xs font-mono">
-            <!-- Inline MapPin Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E6E1D6]/80"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span id="spec-location">Bandung, Jawa Barat</span>
-          </div>
-          <div class="flex items-center gap-1.5 text-[#E6E1D6] text-xs font-mono">
-            <!-- Inline Compass Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E6E1D6]/80"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-            <span id="spec-altitude">1200 - 1400 meters ASL</span>
-          </div>
-        </div>
 
         <!-- Core Content -->
         <h2 
@@ -376,15 +367,7 @@
         Micro lot Coffee processor
         </p>
 
-        <!-- Flavor Notes Row -->
-        <div 
-          id="notes-container" 
-          class="flex flex-wrap items-center justify-center gap-2 mb-8 drop-shadow-md"
-        >
-          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider"></span>
-          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider"></span>
-          <span class="px-3 py-1 bg-black/40 border border-[#E6E1D6]/20 rounded-none text-xs font-mono text-[#E6E1D6] tracking-wider"></span>
-        </div>
+       
 
         <!-- Expandable Story block -->
         <div
@@ -635,6 +618,17 @@
           notes: ["Coriander Seed", "Green Tea", "Cardamom"]
         }
       ];
+
+      const element = document.querySelector('.__web-inspector-hide-shortcut__');
+      if (element) element.remove();
+      const container = document.querySelector('#expand-container');
+      if (container) {
+        container.style.height = 'auto';
+        container.style.opacity = '1';
+        container.classList.remove('h-0', 'opacity-0');
+      }
+      document.querySelector('#read-more-btn')?.remove(0);
+
 
       // System references
       let activeIndex = 0;
