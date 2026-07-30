@@ -345,11 +345,11 @@
         class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center gap-8 text-[10px] font-sans uppercase tracking-[0.25em] text-[#E6E1D6]/85 drop-shadow-md"
         aria-label="Primary"
       >
-        <a href="#story" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
+        <a href="https://joannanorton.github.io/melodycoffee/about.html" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
         <span class="text-[#E6E1D6]/30 pointer-events-none" aria-hidden="true">/</span>
-        <a href="#origins" data-nav="origins" class="nav-link hover:text-white transition-colors">Origins</a>
+        <a href="https://joannanorton.github.io/melodycoffee/produk.html" data-nav="Produk" class="nav-link hover:text-white transition-colors">Produk</a>
         <span class="text-[#E6E1D6]/30 pointer-events-none" aria-hidden="true">/</span>
-        <a href="#craft-journey" data-nav="craft" class="nav-link hover:text-white transition-colors">Craft</a>
+        <a href="https://joannanorton.github.io/melodycoffee/process.html" data-nav="Process" class="nav-link hover:text-white transition-colors">Process</a>
       </nav>
 
       <div class="flex items-center md:hidden ml-auto">
@@ -376,9 +376,9 @@
         role="dialog"
         aria-label="Mobile navigation"
       >
-        <a href="#story" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
-        <a href="#origins" data-nav="origins" class="nav-link hover:text-white transition-colors">Origins</a>
-        <a href="#craft-journey" data-nav="craft" class="nav-link hover:text-white transition-colors">Craft</a>
+        <a href="https://joannanorton.github.io/melodycoffee/about.html" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
+        <a href="https://joannanorton.github.io/melodycoffee/produk.html" data-nav="produk" class="nav-link hover:text-white transition-colors">Produk</a>
+        <a href="https://joannanorton.github.io/melodycoffee/process" data-nav="process" class="nav-link hover:text-white transition-colors">Process</a>
       </div>
     </header>
 
@@ -789,6 +789,11 @@
         const iconClose = document.getElementById('menu-icon-close');
 
         toggle?.addEventListener('click', () => {
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', !isExpanded);
+          menu.classList.toggle('hidden');
+          openIcon.classList.toggle('hidden');
+          closeIcon.classList.toggle('hidden');
           const isOpen = menu.class.toggle('hidden') === false;
           toggle.setAttribute('aria-expanded', String(isOpen));
           toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
