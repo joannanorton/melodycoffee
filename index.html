@@ -69,6 +69,10 @@
         writing-mode: vertical-rl;
       }
 
+      .nav-link.is-active {
+        color: #fff;
+      }
+
       /* Pinned scrollytelling craft journey */
       #craft-journey {
         position: relative;
@@ -336,13 +340,45 @@
         </div>
       </div>
 
-      <!-- Center navigation labels (purely floating) -->
-      <div class="hidden md:flex items-center gap-8 text-[10px] font-sans uppercase tracking-[0.25em] text-[#E6E1D6]/85 drop-shadow-md">
-        <span class="hover:text-white transition-colors cursor-pointer">Story</span>
-        <span class="text-[#E6E1D6]/30">/</span>
-        <span class="hover:text-white transition-colors cursor-pointer">Origins</span>
-        <span class="text-[#E6E1D6]/30">/</span>
-        <span class="hover:text-white transition-colors cursor-pointer">Craft</span>
+      <nav
+        id="main-nav"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center gap-8 text-[10px] font-sans uppercase tracking-[0.25em] text-[#E6E1D6]/85 drop-shadow-md"
+        aria-label="Primary"
+      >
+        <a href="#story" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
+        <span class="text-[#E6E1D6]/30 pointer-events-none" aria-hidden="true">/</span>
+        <a href="#origins" data-nav="origins" class="nav-link hover:text-white transition-colors">Origins</a>
+        <span class="text-[#E6E1D6]/30 pointer-events-none" aria-hidden="true">/</span>
+        <a href="#craft-journey" data-nav="craft" class="nav-link hover:text-white transition-colors">Craft</a>
+      </nav>
+
+      <div class="flex items-center md:hidden ml-auto">
+        <button
+          id="menu-toggle"
+          type="button"
+          class="text-[#E6E1D6] p-2 -mr-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#E6E1D6]/50 rounded"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 right-0 border-b border-[#E6E1D6]/15 bg-[#0F0E0D]/95 backdrop-blur-md py-6 px-6 flex flex-col items-center gap-5 text-[11px] font-sans uppercase tracking-[0.25em] text-[#E6E1D6]/85 shadow-lg"
+        role="dialog"
+        aria-label="Mobile navigation"
+      >
+        <a href="#story" data-nav="story" class="nav-link hover:text-white transition-colors">Story</a>
+        <a href="#origins" data-nav="origins" class="nav-link hover:text-white transition-colors">Origins</a>
+        <a href="#craft-journey" data-nav="craft" class="nav-link hover:text-white transition-colors">Craft</a>
       </div>
     </header>
 
@@ -447,11 +483,11 @@
     </footer>
 
     <!-- 8. PANEL CONTAINERS FOR SCROLLTRIGGER MARKERS -->
-    <div class="relative z-20">
-      <div class="panel w-full" style="height: 120vh;"></div>
-      <div class="panel w-full" style="height: 120vh;"></div>
-      <div class="panel w-full" style="height: 120vh;"></div>
-      <div class="panel w-full" style="height: 120vh;"></div>
+    <div class="relative z-20" id="story">
+      <div class="panel w-full" data-scene="0" style="height: 120vh;"></div>
+      <div class="panel w-full" data-scene="1" id="origins" style="height: 120vh;"></div>
+      <div class="panel w-full" data-scene="2" style="height: 120vh;"></div>
+      <div class="panel w-full" data-scene="3" style="height: 120vh;"></div>
     </div>
 
     <!-- 9. PINNED SCROLLYTELLING CRAFT JOURNEY -->
@@ -679,7 +715,97 @@
               scrollInd.style.opacity = (1 - (progress * 4)).toString();
             }
           }
+
+          updateNavActiveState();
         });
+      }
+
+      function setNavActive(section) {
+        document.querySelectorAll('.nav-link').forEach((link) => {
+          link.classList.toggle('is-active', link.dataset.nav === section);
+          if (link.dataset.nav === section) {
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      function updateNavActiveState() {
+        const craftJourney = document.getElementById('craft-journey');
+        if (craftJourney) {
+          const craftRect = craftJourney.getBoundingClientRect();
+          if (craftRect.top <= window.innerHeight * 0.35) {
+            setNavActive('craft');
+            return;
+          }
+        }
+        if (activeIndex >= 1) {
+          setNavActive('origins');
+        } else {
+          setNavActive('story');
+        }
+      }
+
+      function closeMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const toggle = document.getElementById('menu-toggle');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        if (!menu || !toggle) return;
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        iconOpen?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+      }
+
+      function scrollToNavTarget(section) {
+        if (!lenis) return;
+
+        const scrollOpts = { duration: 1.35, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) };
+
+        if (section === 'story') {
+          lenis.scrollTo(0, scrollOpts);
+          return;
+        }
+        if (section === 'origins') {
+          const originsPanel = document.getElementById('origins');
+          if (originsPanel) {
+            lenis.scrollTo(originsPanel, { ...scrollOpts, offset: -window.innerHeight * 0.45 });
+          }
+          return;
+        }
+        if (section === 'craft') {
+          const craft = document.getElementById('craft-journey');
+          if (craft) lenis.scrollTo(craft, scrollOpts);
+        }
+      }
+
+      function initNav() {
+        const toggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        toggle?.addEventListener('click', () => {
+          const isOpen = menu.class.toggle('hidden') === false;
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+          iconOpen?.classList.toggle('hidden', isOpen);
+          iconClose?.classList.toggle('hidden', !isOpen);
+        });
+
+        document.querySelectorAll('.nav-link').forEach((link) => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.dataset.nav;
+            if (section) scrollToNavTarget(section);
+            closeMobileMenu();
+          });
+        });
+
+        setNavActive('story');
       }
 
       // Smooth cinematic GSAP transitions
@@ -691,6 +817,7 @@
 
         // Update left vertical counter digit
         document.getElementById('left-counter-curr').innerText = `0${targetIndex + 1}`;
+        updateNavActiveState();
 
         // Create transition timeline
         const tl = gsap.timeline();
@@ -930,6 +1057,7 @@
       // Fire setup on load
       window.addEventListener('DOMContentLoaded', () => {
         initLenis();
+        initNav();
         initScrollTriggers();
         initCraftAnimations();
         initExpandToggle();
